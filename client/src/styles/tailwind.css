@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.helloHand {
+  animation: bounce 1s infinite;
+  display: inline-block;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: rotate(45deg);
+  }
+  50% {
+    transform: rotate(0);
+  }
+}

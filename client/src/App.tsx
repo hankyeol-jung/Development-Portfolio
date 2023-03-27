@@ -17,6 +17,7 @@ import {
   ZoomIn,
   ZoomOut,
 } from "react-scroll-motion";
+// import mainImg1 from "../public/images/main1.jpg";
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
 
 function Header() {
   return (
-    <nav className="fixed z-10 w-screen bg-opaqueGray-700">
+    <nav className="fixed z-10 w-screen bg-opaqueGray-700 backdrop-blur-md">
       <div className="flex items-center justify-between px-10 mx-auto max-w-7xl h-14">
         <div className="text-base font-bold text-white cursor-pointer">
           한결
@@ -48,25 +49,9 @@ function Header() {
 }
 
 function Main() {
-  const ZoomInScroll = batch(Sticky(), ZoomIn(), FadeIn());
+  const ZoomInScroll = batch(Sticky(), ZoomIn(), Fade());
   const ZoomInScrollOut = batch(Sticky(), Fade(), ZoomIn());
   const FadeUp = batch(Move(0, 1000), Fade(), Sticky());
-  const StickyFade = batch(FadeIn(), Sticky());
-
-  const [position, setPosition] = useState(0);
-  function onScroll() {
-    setPosition(window.scrollY);
-  }
-
-  useEffect(() => {
-    if (position > 500) {
-      console.log("hhh");
-    }
-    window.addEventListener("scroll", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, [onScroll]);
 
   return (
     <div>
@@ -81,13 +66,14 @@ function Main() {
         <ScrollPage>
           <Animator
             animation={ZoomInScroll}
-            className="bg-gray-100 rounded-3xl w-[90%] h-[80%] flex justify-center items-center"
+            className="bg-gray-100 rounded-3xl w-[90%] h-[80%] flex justify-center items-center overflow-hidden brightness-100"
           >
-            <div></div>
+            {/* <img src={mainImg1}></img> */}
+            <img src="/images/main1.jpg" className="w-full opacity-30"></img>
           </Animator>
           <Animator animation={ZoomInScrollOut}>
-            <span className="font-black text-transparent text-7xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-              안녕하세요. 👋
+            <span className="font-black text-gray-900 text-7xl">
+              안녕하세요. <span className="helloHand">👋</span>
             </span>
           </Animator>
         </ScrollPage>
