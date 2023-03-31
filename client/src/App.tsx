@@ -19,7 +19,11 @@ import {
 } from "react-scroll-motion";
 import { motion, Variants } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHtml5 } from "@fortawesome/free-brands-svg-icons";
+import {
+  faHtml5,
+  faCss3Alt,
+  faBootstrap,
+} from "@fortawesome/free-brands-svg-icons";
 
 function App() {
   return (
@@ -223,6 +227,63 @@ function Header() {
 //   );
 // }
 
+const skillData = [
+  {
+    name: "Mark up",
+    skill: [
+      {
+        name: "HTML",
+        logo: <FontAwesomeIcon icon={faHtml5} />,
+        description:
+          "HTML은 HyperText Markup Language의 약자로, 웹 페이지를 만들기 위한 마크업 언어입니다.",
+        bgColor: "#E76328",
+        textColor: "text-amber-900",
+      },
+      {
+        name: "CSS",
+        logo: <FontAwesomeIcon icon={faCss3Alt} />,
+        description:
+          "CSS는 Cascading Style Sheets의 약자로, HTML로 작성된 웹 페이지의 스타일과 레이아웃을 꾸며주는 스타일 시트 언어입니다.",
+        bgColor: "#244BDD",
+        textColor: "text-blue-200",
+      },
+      {
+        name: "Bootstrap",
+        logo: <FontAwesomeIcon icon={faBootstrap} />,
+        description:
+          "Bootstrap은 Twitter에서 개발한 오픈 소스 프론트엔드 프레임워크로, HTML, CSS, JavaScript를 사용하여 반응형 웹 페이지를 구축할 수 있도록 도와줍니다.",
+        bgColor: "#533B78",
+        textColor: "text-purple-200",
+      },
+      {
+        name: "Tailwind css",
+        logo: (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="48"
+            height="48"
+            viewBox="0 0 1000 1000"
+            fill="none"
+          >
+            <path
+              d="M489.5 226.499C328 231.632 280 346.999 269 409.499C283.333 386.332 328.5 335.5 395 335.5C472.5 335.5 531.5 422 567.5 449C611.237 481.803 699.123 525.115 814.5 490C906.5 462 949.167 364.332 958.5 317.999C914 378.499 846.5 414.838 763 371.999C705.5 342.499 662.5 221 489.5 226.499Z"
+              fill="#0C4A6E"
+            />
+            <path
+              d="M261 500.999C99.5 506.132 51.5 621.499 40.5 683.999C54.8333 660.832 100 610 166.5 610C244 610 303 696.5 339 723.5C382.737 756.303 470.623 799.615 586 764.5C678 736.5 720.667 638.832 730 592.499C685.5 652.999 618 689.338 534.5 646.499C477 616.999 434 495.5 261 500.999Z"
+              fill="#0C4A6E"
+            />
+          </svg>
+        ),
+        description:
+          "Tailwind CSS는 클래스 이름으로 스타일을 지정할 수 있는 CSS 프레임워크로, 유연하고 확장성이 높아 커스터마이징이 쉽고 빠르게 디자인을 구현할 수 있습니다.",
+        bgColor: "#35AEA9",
+        textColor: "text-sky-900",
+      },
+    ],
+  },
+];
+
 function Skill() {
   const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -285,36 +346,40 @@ function Skill() {
             </div>
           </div>
           <div className="relative w-[400px]">
-            <Card
-              bg="bg-[#E76328]"
-              right={Math.min(scrollPosition, 300)}
-              top={Math.min(scrollPosition, 300)}
-              rotate={Math.min(scrollPosition / 10, 30)}
-              opacity={opacity(0)}
-              scale={scale(1, 0)}
-              ntop={0}
-              index={3}
-            />
-            <Card
-              bg="bg-yellow-300"
-              right={Math.max(Math.min(scrollPosition - 500, 300), 0)}
-              top={Math.max(Math.min(scrollPosition - 500, 300), 0)}
-              rotate={Math.max(Math.min((scrollPosition - 500) / 10, 30), 0)}
-              opacity={opacity(500)}
-              scale={scale(0.95, 500)}
-              ntop={top(30)}
-              index={2}
-            />
-            <Card
-              bg="bg-gray-300"
-              right={Math.max(Math.min(scrollPosition - 1000, 300), 0)}
-              top={Math.max(Math.min(scrollPosition - 1000, 300), 0)}
-              rotate={Math.max(Math.min((scrollPosition - 1000) / 10, 30), 0)}
-              opacity={opacity(1000)}
-              scale={scale(0.9, 1000)}
-              ntop={top(60)}
-              index={1}
-            />
+            {skillData[0].skill.map((a, i) => {
+              return (
+                <Card
+                  bg={a.bgColor}
+                  right={
+                    i === 0
+                      ? Math.min(scrollPosition - i * 500, 300)
+                      : Math.max(Math.min(scrollPosition - i * 500, 300), 0)
+                  }
+                  top={
+                    i === 0
+                      ? Math.min(scrollPosition - i * 500, 300)
+                      : Math.max(Math.min(scrollPosition - i * 500, 300), 0)
+                  }
+                  rotate={
+                    i === 0
+                      ? Math.min((scrollPosition - i * 500) / 10, 30)
+                      : Math.max(
+                          Math.min((scrollPosition - i * 500) / 10, 30),
+                          0
+                        )
+                  }
+                  opacity={opacity(0 + i * 500)}
+                  scale={scale(1 - i * 0.05, 0 + i * 500)}
+                  ntop={top(0 + i * 30)}
+                  index={-i}
+                  name={a.name}
+                  logo={a.logo}
+                  description={a.description}
+                  textColor={a.textColor}
+                  tag={skillData[0].name}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
@@ -331,6 +396,11 @@ interface CardProps {
   opacity: number;
   scale: number;
   ntop: number;
+  name: string;
+  logo: JSX.Element;
+  description: string;
+  textColor: string;
+  tag: string;
 }
 
 function Card(props: CardProps) {
@@ -345,10 +415,10 @@ function Card(props: CardProps) {
   return (
     <div
       className={
-        props.bg +
         " h-[500px] rounded-3xl absolute top-0 transition-all duration-300 right-0 w-full"
       }
       style={{
+        backgroundColor: `${props.bg}`,
         top: `${props.ntop}px`,
         transform: `translate(${right}px,-${top}px) rotate(${rotate}deg)`,
         opacity: `${props.opacity}`,
@@ -356,18 +426,15 @@ function Card(props: CardProps) {
         zIndex: `${props.index}`,
       }}
     >
-      <div className="flex flex-col h-full p-10 text-amber-900">
+      <div className={"flex flex-col h-full p-10 " + props.textColor}>
         <div>
           <span className="inline-block w-12 h-12 mb-4 text-5xl">
-            <FontAwesomeIcon icon={faHtml5} />
+            {props.logo}
           </span>
-          <div className="mb-6 text-4xl font-bold">HTML</div>
-          <p className="text-xl font-medium">
-            HTML은 HyperText Markup Language의 약자로, 웹 페이지를 만들기 위한
-            마크업 언어입니다.
-          </p>
+          <div className="mb-6 text-4xl font-bold">{props.name}</div>
+          <p className="text-xl font-medium">{props.description}</p>
         </div>
-        <p className="mt-auto text-2xl font-semibold">Mark up</p>
+        <p className="mt-auto text-2xl font-semibold">{props.tag}</p>
       </div>
     </div>
   );
