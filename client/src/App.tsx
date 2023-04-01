@@ -36,16 +36,13 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { setMainHeight } from "./store/store";
 
-function App() {
+interface AppProps {}
+
+function App(props: AppProps) {
   const mainRef = useRef<HTMLDivElement>(null);
-
-  let dispatch = useDispatch();
-
-  useEffect(() => {
-    const height = mainRef.current?.clientHeight;
-
-    dispatch(setMainHeight(height));
-  }, []);
+  let mainHeight: number = useSelector(
+    (state: { mainHeight: number }) => state.mainHeight
+  );
 
   return (
     <div className="App">
@@ -56,7 +53,7 @@ function App() {
       </div>
       <SkillDesign1 index={0} />
       <SkillDesign1 index={1} />
-      <SkillDesign2 index={2} />
+      <SkillDesign1 index={2} />
     </div>
   );
 }
@@ -217,9 +214,55 @@ const skillData = [
 function BackColor() {
   const [bgColor, setBgColor] = useState("rgb(255,255,255)");
 
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const scrollY = window.scrollY;
+  //     if (scrollY >= mainHeight && scrollY <= 300 + mainHeight) {
+  //       const percentage =
+  //         (scrollY - mainHeight) / (300 + mainHeight - mainHeight);
+  //       const newColor = `rgb(${255 - percentage * (255 - 37)}, ${
+  //         255 - percentage * (255 - 109)
+  //       }, ${255 - percentage * (255 - 218)})`;
+  //       setBgColor(newColor);
+  //     } else if (scrollY >= skillHeight0 && scrollY <= skillHeight0 + 300) {
+  //       const percentage =
+  //         (scrollY - skillHeight0) / (300 + skillHeight0 - skillHeight0);
+  //       const newColor = `rgb(${37 - percentage * (37 - 251)}, ${
+  //         109 - percentage * (109 - 98)
+  //       }, ${218 - percentage * (218 - 80)})`;
+  //       setBgColor(newColor);
+  //     } else if (scrollY >= skillHeight1 && scrollY <= skillHeight1 + 300) {
+  //       const percentage =
+  //         (scrollY - skillHeight1) / (300 + skillHeight1 - skillHeight1);
+  //       const newColor = `rgb(${251 - percentage * (251 - 128)}, ${
+  //         98 - percentage * (98 - 89)
+  //       }, ${80 - percentage * (80 - 227)})`;
+  //       setBgColor(newColor);
+  //     } else if (scrollY < mainHeight) {
+  //       setBgColor("rgb(255,255,255)");
+  //     } else if (scrollY < skillHeight0) {
+  //       setBgColor("rgb(37,109,218)");
+  //     } else if (scrollY < skillHeight1) {
+  //       setBgColor("rgb(251,98,80)");
+  //     } else {
+  //       setBgColor("rgb(128,89,227)");
+  //     }
+  //   };
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+
   let mainHeight: number = useSelector(
     (state: { mainHeight: number }) => state.mainHeight
   );
+
+  let skillHeight0 = skillData[0].skill.length * 500 + 1000 + mainHeight;
+  let skillHeight1 = skillHeight0 + skillData[1].skill.length * 500 + 1000;
+
+  console.log(skillHeight1);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -231,27 +274,25 @@ function BackColor() {
           255 - percentage * (255 - 109)
         }, ${255 - percentage * (255 - 218)})`;
         setBgColor(newColor);
-      } else if (scrollY >= 3000 + mainHeight && scrollY <= 3300 + mainHeight) {
+      } else if (scrollY >= skillHeight0 && scrollY <= 300 + skillHeight0) {
         const percentage =
-          (scrollY - (3000 + mainHeight)) /
-          (3300 + mainHeight - (3000 + mainHeight));
+          (scrollY - skillHeight0) / (300 + skillHeight0 - skillHeight0);
         const newColor = `rgb(${37 - percentage * (37 - 251)}, ${
           109 - percentage * (109 - 98)
         }, ${218 - percentage * (218 - 80)})`;
         setBgColor(newColor);
-      } else if (scrollY >= 5500 + mainHeight && scrollY <= 5800 + mainHeight) {
+      } else if (scrollY >= skillHeight1 && scrollY <= 300 + skillHeight1) {
         const percentage =
-          (scrollY - (5500 + mainHeight)) /
-          (5800 + mainHeight - (5500 + mainHeight));
+          (scrollY - skillHeight1) / (300 + skillHeight1 - skillHeight1);
         const newColor = `rgb(${251 - percentage * (251 - 128)}, ${
           98 - percentage * (98 - 89)
         }, ${80 - percentage * (80 - 227)})`;
         setBgColor(newColor);
       } else if (scrollY < mainHeight) {
         setBgColor("rgb(255,255,255)");
-      } else if (scrollY < 3000 + mainHeight) {
+      } else if (scrollY < skillHeight0) {
         setBgColor("rgb(37,109,218)");
-      } else if (scrollY < 5500 + mainHeight) {
+      } else if (scrollY < skillHeight1) {
         setBgColor("rgb(251,98,80)");
       } else {
         setBgColor("rgb(128,89,227)");
@@ -298,7 +339,7 @@ function Main() {
   const FadeUp = batch(Move(0, 1000), Fade(), Sticky());
 
   return (
-    <ScrollContainer>
+    <ScrollContainer style={{ height: "7000px" }}>
       <ScrollPage>
         <Animator animation={batch(Fade(), Sticky(), MoveOut(0, -200))}>
           <span className="text-2xl font-medium text-gray-700">
@@ -341,7 +382,7 @@ function Main() {
       </ScrollPage>
       <ScrollPage>
         <Animator animation={batch(Fade(), Sticky())} className="text-center ">
-          <span className="text-4xl font-bold text-gray-800">
+          <span className="text-4xl font-bold text-gray-800 break-keep">
             개발자가 되기 전부터 생각하는🤔 즐거움을 따라 살다가,
           </span>
           <br />
@@ -382,18 +423,29 @@ interface SkillProps {
 }
 
 function SkillDesign1(props: SkillProps) {
-  let topLocation: number;
   let mainHeight: number = useSelector(
     (state: { mainHeight: number }) => state.mainHeight
   );
 
+  let skillLength = skillData[props.index].skill.length;
+
+  const SKILL_MARGIN = 1000;
+
+  const { index } = props;
+
+  let topLocation = 0;
+  let prevSkillsLength = 0;
+
+  for (let i = 0; i < index; i++) {
+    prevSkillsLength += skillData[i].skill.length;
+  }
+
   if (props.index === 0) {
     topLocation = 0 + mainHeight;
-  } else if (props.index === 1) {
-    topLocation = 3000 + mainHeight;
-  } else if (props.index === 2) {
-    topLocation = 5500 + mainHeight;
+  } else {
+    topLocation = prevSkillsLength * 500 + index * SKILL_MARGIN + mainHeight;
   }
+
   const [scrollPosition, setScrollPosition] = useState(0);
 
   const [moveFixed, setMoveFixed] = useState("absolute");
@@ -434,7 +486,6 @@ function SkillDesign1(props: SkillProps) {
     return a - Math.max(scrollPosition / 10, 0);
   };
 
-  let skillLength = skillData[props.index].skill.length;
   return (
     <div
       className="relative w-full "
@@ -584,10 +635,14 @@ function SkillDesign2(props: SkillProps) {
   if (props.index === 0) {
     topLocation = 0 + mainHeight;
   } else if (props.index === 1) {
-    topLocation = 3000 + mainHeight;
+    topLocation = skillData[0].skill.length * 500 + 1000 + mainHeight;
   } else if (props.index === 2) {
-    topLocation = 5500 + mainHeight;
+    topLocation =
+      (skillData[1].skill.length + skillData[1].skill.length) * 500 +
+      1000 +
+      mainHeight;
   }
+
   const [scrollPosition, setScrollPosition] = useState(0);
 
   const [moveFixed, setMoveFixed] = useState("absolute");
