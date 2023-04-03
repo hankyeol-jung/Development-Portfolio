@@ -34,7 +34,6 @@ import {
   faPhp,
 } from "@fortawesome/free-brands-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
-import { setMainHeight } from "./store/store";
 
 interface AppProps {}
 
@@ -54,6 +53,7 @@ function App(props: AppProps) {
       <SkillDesign1 index={0} />
       <SkillDesign1 index={1} />
       <SkillDesign1 index={2} />
+      <SkillDesign2 index={3} />
     </div>
   );
 }
@@ -189,13 +189,13 @@ const skillData = [
     name: "Back-end",
     bgColor: "#FB6251",
     description:
-      "JavaScript와 TypeScript를 활용하여 React를 이용한 웹 개발을 수행할 수 있습니다. UX/UI 개발에 자신이 있습니다.",
+      "node.js와 php를 사용하여 서버사이드 렌더링 및 RESTful API를 구현할 수 있습니다.",
     skill: [
       {
         name: "Node.js",
         logo: <FontAwesomeIcon icon={faNodeJs} />,
         description:
-          "JavaScript는 웹 페이지를 동적으로 만들기 위한 프로그래밍 언어이며, HTML, CSS와 함께 웹 프론트엔드 개발에서 가장 기본적으로 사용되는 언어입니다.",
+          "Node.js는 자바스크립트 런타임 환경으로, 서버사이드 애플리케이션 개발에 사용되며 비동기 I/O 작업에 특화되어 있다.",
         bgColor: "#7FC729",
         textColor: "text-green-900",
       },
@@ -203,9 +203,76 @@ const skillData = [
         name: "PHP",
         logo: <FontAwesomeIcon icon={faPhp} />,
         description:
-          "React는 페이스북에서 개발한 UI 라이브러리로, 컴포넌트 기반의 웹 개발을 위한 자바스크립트 라이브러리입니다.",
+          "PHP는 서버측에서 실행되는 스크립트 언어로, 동적 웹 페이지 개발에 이용됩니다. 간단한 문법과 높은 호환성이 특징입니다.",
         bgColor: "#22232D",
         textColor: "text-purple-200",
+      },
+    ],
+  },
+  {
+    name: "Database",
+    bgColor: "#E8D04F",
+    description:
+      "node.js와 php를 사용하여 서버사이드 렌더링 및 RESTful API를 구현할 수 있습니다.",
+    skill: [
+      {
+        name: "Mongodb",
+        logo: (
+          <svg
+            width="48px"
+            height="48px"
+            viewBox="0 0 1024 1024"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="512" cy="512" r="512" style={{ fill: "#195335" }} />
+            <path
+              d="M648.86 449.44c-32.34-142.73-108.77-189.66-117-207.59-9-12.65-18.12-35.15-18.12-35.15-.15-.38-.39-1.05-.67-1.7-.93 12.65-1.41 17.53-13.37 30.29-18.52 14.48-113.54 94.21-121.27 256.37-7.21 151.24 109.25 241.36 125 252.85l1.79 1.27v-.11c.1.76 5 36 8.44 73.34H526a726.68 726.68 0 0 1 13-78.53l1-.65a204.48 204.48 0 0 0 20.11-16.45l.72-.65c33.48-30.93 93.67-102.47 93.08-216.53a347.07 347.07 0 0 0-5.05-56.76zM512.35 659.12s0-212.12 7-212.08c5.46 0 12.53 273.61 12.53 273.61-9.72-1.17-19.53-45.03-19.53-61.53z"
+              style={{ fill: "#13aa52" }}
+            />
+          </svg>
+        ),
+        description:
+          "MongoDB는 NoSQL 데이터베이스로, 높은 확장성과 유연성, 빠른 속도, JSON 기반의 문서 저장 방식 등을 특징으로 합니다.",
+        bgColor: "#13aa52",
+        textColor: "text-green-900",
+      },
+      {
+        name: "Mysql",
+        logo: (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="48"
+            width="100"
+            viewBox="-58.46985 -50.32625 506.7387 301.9575"
+          >
+            <path
+              d="M0 183.354h12.842v-50.711l19.88 44.208c2.346 5.35 5.557 7.244 11.854 7.244 6.298 0 9.385-1.893 11.732-7.244l19.88-44.208v50.71H89.03v-50.627c0-4.94-1.976-7.327-6.05-8.561-9.755-3.046-16.3-.412-19.264 6.174l-19.51 43.63-18.892-43.63c-2.84-6.586-9.508-9.22-19.263-6.174C1.976 125.399 0 127.787 0 132.725v50.629zm99.708-41.276h12.838v27.938c-.12 1.518.487 5.08 7.522 5.19 3.589.057 27.7 0 27.925 0v-33.264h12.868c.059 0-.013 45.364-.012 45.557.07 11.188-13.882 13.618-20.313 13.806h-40.55v-8.64c.072 0 40.52.009 40.622-.001 8.265-.873 7.289-4.981 7.288-6.364v-3.368H120.6c-12.7-.117-20.786-5.66-20.886-12.035-.01-.591.274-28.54-.007-28.82z"
+              fill="#BFDBFE"
+            />
+            <path
+              d="M170.758 183.354h36.92c4.322 0 8.52-.905 11.855-2.47 5.556-2.551 8.273-6.008 8.273-10.537v-9.384c0-3.705-3.087-7.163-9.138-9.467-3.211-1.236-7.162-1.894-10.99-1.894h-15.56c-5.184 0-7.654-1.564-8.271-5.021-.124-.412-.124-.742-.124-1.153v-5.844c0-.33 0-.66.124-1.071.617-2.634 1.976-3.376 6.544-3.787.37 0 .864-.083 1.235-.083H228.3v-8.56h-36.057c-5.186 0-7.903.329-10.372 1.069-7.656 2.388-10.99 6.175-10.99 12.76v7.492c0 5.763 6.545 10.702 17.534 11.854 1.236.082 2.47.164 3.704.164h13.336c.495 0 .989 0 1.359.083 4.075.33 5.803 1.07 7.039 2.552.74.74.987 1.482.987 2.305v7.49c0 .907-.617 2.06-1.851 3.047-1.112.988-2.964 1.647-5.434 1.812-.494 0-.864.082-1.358.082h-35.44v8.56zm137.16-14.9c0 8.808 6.544 13.748 19.757 14.736 1.234.082 2.47.164 3.704.164h33.464v-8.561h-33.711c-7.532 0-10.372-1.894-10.372-6.421v-44.29h-12.842v44.372zm-71.916.449V138.38c0-7.754 5.445-12.457 16.209-13.942a24.63 24.63 0 013.465-.247h24.376c1.237 0 2.352.083 3.589.247 10.765 1.485 16.209 6.188 16.209 13.942v30.522c0 6.29-2.312 9.658-7.641 11.852l12.65 11.418h-14.911l-10.234-9.238-10.303.653h-13.735c-2.351 0-4.825-.331-7.548-1.073-8.166-2.227-12.126-6.517-12.126-13.612zm13.86-.742c0 .413.124.825.248 1.32.742 3.547 4.083 5.527 9.156 5.527h11.667l-10.717-9.675h14.91l9.348 8.438c1.722-.918 2.856-2.322 3.252-4.125.123-.412.123-.825.123-1.237v-29.285c0-.33 0-.743-.123-1.156-.743-3.3-4.084-5.196-9.033-5.196h-19.427c-5.691 0-9.403 2.475-9.403 6.352v29.037z"
+              fill="#BFDBFE"
+            />
+            <path
+              d="M376.14 109.88c-7.893-.214-13.923.52-19.078 2.694-1.465.618-3.801.634-4.04 2.47.805.844.93 2.104 1.57 3.142 1.23 1.992 3.309 4.661 5.163 6.061 2.026 1.53 4.114 3.165 6.286 4.49 3.863 2.355 8.176 3.7 11.896 6.06 2.192 1.391 4.37 3.143 6.509 4.713 1.057.776 1.768 1.983 3.142 2.47v-.225c-.722-.919-.908-2.183-1.571-3.143l-2.918-2.918c-2.853-3.787-6.475-7.113-10.325-9.876-3.07-2.204-9.942-5.18-11.223-8.754l-.225-.225c2.177-.245 4.726-1.033 6.735-1.57 3.375-.906 6.39-.672 9.876-1.572 1.57-.449 3.142-.899 4.714-1.347v-.898c-1.762-1.808-3.018-4.2-4.94-5.836-5.025-4.28-10.511-8.556-16.16-12.121-3.133-1.978-7.005-3.263-10.325-4.939-1.117-.563-3.08-.856-3.817-1.796-1.744-2.223-2.694-5.042-4.04-7.632-2.817-5.425-5.584-11.351-8.08-17.06-1.703-3.892-2.815-7.73-4.938-11.223-10.192-16.757-21.163-26.87-38.158-36.812-3.616-2.114-7.97-2.95-12.571-4.04l-7.407-.45c-1.507-.63-3.075-2.473-4.49-3.367-5.63-3.556-20.07-11.293-24.24-1.122-2.633 6.42 3.935 12.685 6.284 15.938 1.649 2.282 3.76 4.84 4.938 7.407.775 1.687.909 3.378 1.572 5.163 1.632 4.397 3.05 9.18 5.162 13.243 1.067 2.056 2.243 4.222 3.592 6.06.827 1.129 2.244 1.626 2.468 3.368-1.386 1.94-1.465 4.95-2.244 7.407-3.508 11.062-2.185 24.81 2.918 32.997 1.566 2.513 5.254 7.903 10.325 5.836 4.436-1.807 3.445-7.406 4.714-12.345.287-1.12.11-1.944.673-2.694v.225l4.04 8.08c2.99 4.815 8.298 9.848 12.795 13.244 2.332 1.761 4.168 4.806 7.183 5.836v-.225h-.225c-.584-.91-1.498-1.288-2.244-2.02-1.757-1.722-3.71-3.863-5.163-5.836-4.09-5.553-7.705-11.63-10.998-17.957-1.573-3.02-2.94-6.354-4.266-9.428-.511-1.185-.505-2.977-1.57-3.592-1.452 2.253-3.591 4.075-4.714 6.735-1.796 4.252-2.028 9.437-2.693 14.814-.394.141-.22.044-.45.224-3.126-.754-4.225-3.972-5.386-6.733-2.94-6.982-3.485-18.225-.9-26.262.67-2.08 3.694-8.63 2.47-10.55-.584-1.917-2.512-3.026-3.591-4.49-1.335-1.811-2.668-4.195-3.592-6.286-2.405-5.444-3.528-11.555-6.06-17.058-1.21-2.631-3.257-5.293-4.938-7.632-1.861-2.59-3.945-4.5-5.387-7.633-.513-1.113-1.21-2.895-.45-4.04.243-.772.584-1.095 1.348-1.347 1.302-1.003 4.928.334 6.284.898 3.6 1.495 6.604 2.919 9.653 4.938 1.464.971 2.944 2.848 4.713 3.368h2.02c3.16.726 6.7.225 9.652 1.122 5.218 1.586 9.894 4.052 14.14 6.734 12.939 8.169 23.517 19.798 30.753 33.67 1.164 2.233 1.668 4.365 2.693 6.734 2.069 4.778 4.675 9.694 6.733 14.366 2.054 4.66 4.056 9.365 6.959 13.244 1.527 2.039 7.422 3.133 10.1 4.264 1.879.794 4.956 1.621 6.735 2.693 3.398 2.05 6.69 4.49 9.877 6.735 1.593 1.122 6.489 3.583 6.733 5.611z"
+              fill="#BFDBFE"
+            />
+            <path
+              d="M275.807 24.359c-1.646-.03-2.81.18-4.041.448v.225h.225c.785 1.613 2.17 2.651 3.142 4.04a6815.3 6815.3 0 002.245 4.714l.224-.224c1.39-.98 2.027-2.547 2.02-4.938-.557-.586-.64-1.322-1.122-2.021-.642-.932-1.884-1.46-2.693-2.244z"
+              fill="#BFDBFE"
+              fill-rule="evenodd"
+            />
+            <path
+              d="M370.87 174.549c0 5.654 4.468 9.464 9.465 9.464s9.464-3.81 9.464-9.464c0-5.653-4.467-9.463-9.464-9.463-4.997 0-9.464 3.81-9.464 9.463zm16.809 0c0 4.29-3.28 7.496-7.344 7.496-4.113 0-7.344-3.206-7.344-7.496 0-4.29 3.23-7.496 7.344-7.496 4.064 0 7.344 3.206 7.344 7.496zm-4.794 5.4h2.119l-3.103-4.743c1.665-.177 2.926-.985 2.926-2.953 0-2.196-1.387-3.104-4.062-3.104h-4.215v10.8h1.817v-4.668h1.69l2.828 4.669zm-4.518-6.182v-3.104h2.094c1.086 0 2.398.202 2.398 1.464 0 1.513-1.186 1.64-2.55 1.64h-1.942z"
+              fill="#BFDBFE"
+              fill-rule="evenodd"
+            />
+          </svg>
+        ),
+        description:
+          "Mysql은 오픈소스 관계형 데이터베이스 관리 시스템으로 데이터를 구조화하고 저장하는 데 사용됩니다.",
+        bgColor: "#00618a",
+        textColor: "text-blue-200",
       },
     ],
   },
@@ -214,55 +281,13 @@ const skillData = [
 function BackColor() {
   const [bgColor, setBgColor] = useState("rgb(255,255,255)");
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const scrollY = window.scrollY;
-  //     if (scrollY >= mainHeight && scrollY <= 300 + mainHeight) {
-  //       const percentage =
-  //         (scrollY - mainHeight) / (300 + mainHeight - mainHeight);
-  //       const newColor = `rgb(${255 - percentage * (255 - 37)}, ${
-  //         255 - percentage * (255 - 109)
-  //       }, ${255 - percentage * (255 - 218)})`;
-  //       setBgColor(newColor);
-  //     } else if (scrollY >= skillHeight0 && scrollY <= skillHeight0 + 300) {
-  //       const percentage =
-  //         (scrollY - skillHeight0) / (300 + skillHeight0 - skillHeight0);
-  //       const newColor = `rgb(${37 - percentage * (37 - 251)}, ${
-  //         109 - percentage * (109 - 98)
-  //       }, ${218 - percentage * (218 - 80)})`;
-  //       setBgColor(newColor);
-  //     } else if (scrollY >= skillHeight1 && scrollY <= skillHeight1 + 300) {
-  //       const percentage =
-  //         (scrollY - skillHeight1) / (300 + skillHeight1 - skillHeight1);
-  //       const newColor = `rgb(${251 - percentage * (251 - 128)}, ${
-  //         98 - percentage * (98 - 89)
-  //       }, ${80 - percentage * (80 - 227)})`;
-  //       setBgColor(newColor);
-  //     } else if (scrollY < mainHeight) {
-  //       setBgColor("rgb(255,255,255)");
-  //     } else if (scrollY < skillHeight0) {
-  //       setBgColor("rgb(37,109,218)");
-  //     } else if (scrollY < skillHeight1) {
-  //       setBgColor("rgb(251,98,80)");
-  //     } else {
-  //       setBgColor("rgb(128,89,227)");
-  //     }
-  //   };
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
-
   let mainHeight: number = useSelector(
     (state: { mainHeight: number }) => state.mainHeight
   );
 
   let skillHeight0 = skillData[0].skill.length * 500 + 1000 + mainHeight;
   let skillHeight1 = skillHeight0 + skillData[1].skill.length * 500 + 1000;
-
-  console.log(skillHeight1);
+  let skillHeight2 = skillHeight1 + skillData[2].skill.length * 500 + 1000;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -288,14 +313,23 @@ function BackColor() {
           98 - percentage * (98 - 89)
         }, ${80 - percentage * (80 - 227)})`;
         setBgColor(newColor);
+      } else if (scrollY >= skillHeight2 && scrollY <= 300 + skillHeight2) {
+        const percentage =
+          (scrollY - skillHeight2) / (300 + skillHeight2 - skillHeight2);
+        const newColor = `rgb(${128 - percentage * (128 - 232)}, ${
+          89 - percentage * (89 - 170)
+        }, ${227 - percentage * (227 - 77)})`;
+        setBgColor(newColor);
       } else if (scrollY < mainHeight) {
         setBgColor("rgb(255,255,255)");
       } else if (scrollY < skillHeight0) {
         setBgColor("rgb(37,109,218)");
       } else if (scrollY < skillHeight1) {
         setBgColor("rgb(251,98,80)");
-      } else {
+      } else if (scrollY < skillHeight2) {
         setBgColor("rgb(128,89,227)");
+      } else {
+        setBgColor("rgb(232,170,77)");
       }
     };
     window.addEventListener("scroll", handleScroll);
@@ -616,6 +650,8 @@ function SkillDesign1(props: SkillProps) {
                   description={a.description}
                   textColor={a.textColor}
                   tag={skillData[props.index].name}
+                  marginTop={0}
+                  position={"absolute"}
                 />
               );
             })}
@@ -625,22 +661,28 @@ function SkillDesign1(props: SkillProps) {
     </div>
   );
 }
-
 function SkillDesign2(props: SkillProps) {
-  let topLocation: number;
   let mainHeight: number = useSelector(
     (state: { mainHeight: number }) => state.mainHeight
   );
 
+  let skillLength = skillData[props.index].skill.length;
+
+  const SKILL_MARGIN = 1000;
+
+  const { index } = props;
+
+  let topLocation = 0;
+  let prevSkillsLength = 0;
+
+  for (let i = 0; i < index; i++) {
+    prevSkillsLength += skillData[i].skill.length;
+  }
+
   if (props.index === 0) {
     topLocation = 0 + mainHeight;
-  } else if (props.index === 1) {
-    topLocation = skillData[0].skill.length * 500 + 1000 + mainHeight;
-  } else if (props.index === 2) {
-    topLocation =
-      (skillData[1].skill.length + skillData[1].skill.length) * 500 +
-      1000 +
-      mainHeight;
+  } else {
+    topLocation = prevSkillsLength * 500 + index * SKILL_MARGIN + mainHeight;
   }
 
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -654,6 +696,7 @@ function SkillDesign2(props: SkillProps) {
     };
 
     window.addEventListener("scroll", handleScroll);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -682,7 +725,6 @@ function SkillDesign2(props: SkillProps) {
     return a - Math.max(scrollPosition / 10, 0);
   };
 
-  let skillLength = skillData[props.index].skill.length;
   return (
     <div
       className="relative w-full "
@@ -701,14 +743,14 @@ function SkillDesign2(props: SkillProps) {
                 opacity: `${
                   scrollPosition < 1000
                     ? opacityIn(skillLength + 100, 100)
-                    : opacityOut(skillLength * 500 + 400, 100)
+                    : opacityOut(skillLength * 1200 + 400, 100)
                 }`,
                 transform: `translateY(${
                   scrollPosition < 1000
                     ? 100 - Math.max(Math.min(scrollPosition - 100, 100), 0)
                     : -Math.max(
                         Math.min(
-                          scrollPosition - (skillLength * 500 + 400),
+                          scrollPosition - (skillLength * 1200 + 400),
                           300
                         ),
                         0
@@ -728,14 +770,14 @@ function SkillDesign2(props: SkillProps) {
                 opacity: `${
                   scrollPosition < 1000
                     ? opacityIn(skillLength + 200, 100)
-                    : opacityOut(skillLength * 500 + 500, 100)
+                    : opacityOut(skillLength * 1200 + 500, 100)
                 }`,
                 transform: `translateY(${
                   scrollPosition < 1000
                     ? 100 - Math.max(Math.min(scrollPosition - 200, 100), 0)
                     : -Math.max(
                         Math.min(
-                          scrollPosition - (skillLength * 500 + 500),
+                          scrollPosition - (skillLength * 1200 + 500),
                           300
                         ),
                         0
@@ -765,18 +807,13 @@ function SkillDesign2(props: SkillProps) {
           <div
             className="relative w-[400px]"
             style={{
-              opacity: `${
-                scrollPosition < 1000
-                  ? opacityIn(skillLength + 300, 100)
-                  : opacityOut(skillLength * 500 + 300, 100)
-              }`,
+              opacity: `1`,
               transform: `translateY(${
-                scrollPosition < 1000
-                  ? 100 - Math.max(Math.min(scrollPosition - 300, 100), 0)
-                  : -Math.max(
-                      Math.min(scrollPosition - (skillLength * 500 + 300), 300),
-                      0
-                    )
+                1000 -
+                Math.max(
+                  Math.min(scrollPosition - 200, skillLength * 1000 + 1000),
+                  0
+                )
               }px)`,
             }}
           >
@@ -784,35 +821,20 @@ function SkillDesign2(props: SkillProps) {
               return (
                 <Card
                   bg={a.bgColor}
-                  right={
-                    i === 0
-                      ? Math.min(scrollPosition - (i * 500 + 400), 300)
-                      : Math.max(
-                          Math.min(scrollPosition - (i * 500 + 400), 300),
-                          0
-                        )
-                  }
-                  top={
-                    i === 0
-                      ? Math.min(scrollPosition - (i * 500 + 400), 300)
-                      : Math.max(
-                          Math.min(scrollPosition - (i * 500 + 400), 300),
-                          0
-                        )
-                  }
-                  rotate={Math.max(
-                    Math.min((scrollPosition - (i * 500 + 400)) / 10, 30),
-                    0
-                  )}
-                  opacity={opacityOut(0 + (i * 500 + 400), 500)}
-                  scale={scale(1 - i * 0.05, 0 + (i * 500 + 400))}
-                  ntop={top(0 + i * 30)}
+                  right={0}
+                  top={0}
+                  rotate={0}
+                  opacity={1}
+                  scale={1}
+                  ntop={0}
                   zIndex={-i}
                   name={a.name}
                   logo={a.logo}
                   description={a.description}
                   textColor={a.textColor}
                   tag={skillData[props.index].name}
+                  marginTop={props.index === 0 ? 0 : 60}
+                  position={"relative"}
                 />
               );
             })}
@@ -837,6 +859,8 @@ interface CardProps {
   description: string;
   textColor: string;
   tag: string;
+  marginTop: number;
+  position: string;
 }
 
 function Card(props: CardProps) {
@@ -851,7 +875,8 @@ function Card(props: CardProps) {
   return (
     <div
       className={
-        " h-[500px] rounded-3xl absolute top-0 transition-all duration-300 right-0 w-full"
+        props.position +
+        " h-[500px] rounded-3xl top-0 transition-all duration-300 right-0 w-full"
       }
       style={{
         backgroundColor: `${props.bg}`,
@@ -860,6 +885,7 @@ function Card(props: CardProps) {
         opacity: `${props.opacity}`,
         scale: `${props.scale}`,
         zIndex: `${props.zIndex}`,
+        marginTop: `${props.marginTop}px`,
       }}
     >
       <div className={"flex flex-col h-full p-10 " + props.textColor}>
