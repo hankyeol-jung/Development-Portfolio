@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  MutableRefObject,
-  RefObject,
-} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Animator,
   ScrollContainer,
@@ -35,13 +29,30 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
 
-interface AppProps {}
-
-function App(props: AppProps) {
+function App() {
   const mainRef = useRef<HTMLDivElement>(null);
-  let mainHeight: number = useSelector(
-    (state: { mainHeight: number }) => state.mainHeight
-  );
+  const skillRef = useRef<HTMLDivElement>(null);
+  let [skillHeight, setSkillHeight] = useState(0);
+  let [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // 스크롤 위치를 변경할 때마다 호출되는 이벤트 핸들러 등록
+    const handleScroll = () => {
+      setSkillHeight(skillRef.current?.clientHeight ?? 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (skillHeight != 0) {
+      setLoading(true);
+    }
+  }, [skillHeight]);
 
   return (
     <div className="App">
@@ -50,10 +61,131 @@ function App(props: AppProps) {
       <div ref={mainRef}>
         <Main />
       </div>
-      <SkillDesign1 index={0} />
-      <SkillDesign1 index={1} />
-      <SkillDesign1 index={2} />
-      <SkillDesign2 index={3} />
+      <div ref={skillRef}>
+        <SkillDesign1 index={0} />
+        <SkillDesign1 index={1} />
+        <SkillDesign1 index={2} />
+        <SkillDesign2 index={3} />
+      </div>
+      {loading === true ? (
+        <Projects index={3} skillHeight={skillHeight} />
+      ) : null}
+    </div>
+  );
+}
+
+function Footer() {}
+
+interface ProjectsProps {
+  index: number;
+  skillHeight?: number;
+}
+
+function Projects(props: ProjectsProps) {
+  let mainHeight: number = useSelector(
+    (state: { mainHeight: number }) => state.mainHeight
+  );
+
+  let topLocation: number = props.skillHeight || 0;
+  topLocation = topLocation - 300 + mainHeight;
+
+  const [scrollPosition, setScrollPosition] = useState(0);
+  useEffect(() => {
+    // 스크롤 위치를 변경할 때마다 호출되는 이벤트 핸들러 등록
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY - topLocation);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  let opacityIn = (a: number, b: number) => {
+    return 0 + Math.max((scrollPosition - a) / b, 0);
+  };
+
+  return (
+    <div className="relative flex flex-col pb-40">
+      <h2
+        className="mt-32 mb-16 text-6xl font-extrabold text-center text-white opacity-0"
+        style={{
+          opacity: `${opacityIn(100, 100)}`,
+          transform: `translateY(${
+            100 - Math.max(Math.min(scrollPosition - 100, 100), 0)
+          }px)`,
+        }}
+      >
+        프로젝트
+      </h2>
+      <div
+        className="flex flex-wrap justify-center"
+        style={{
+          opacity: `${opacityIn(200, 100)}`,
+          transform: `translateY(${
+            100 - Math.max(Math.min(scrollPosition - 200, 100), 0)
+          }px)`,
+        }}
+      >
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+      </div>
+    </div>
+  );
+}
+
+function ProjectCard() {
+  return (
+    <div className="w-[480px] h-[300px] rounded-xl mx-10 px-7 py-10 relative overflow-hidden group cursor-pointer mb-10 flex justify-between flex-col">
+      <div>
+        <div className="relative z-10 mb-5 transition-all duration-500 opacity-0 group-hover:opacity-100 ">
+          <p className="mb-2 text-3xl font-bold text-center text-white break-keep ">
+            농업 네비게이션 Front-end 개발
+          </p>
+          <p className="text-xl font-medium text-center text-gray-200 break-keep ">
+            팜커넥트
+          </p>
+          {/* <p className="text-base font-medium text-center text-white break-keep ">
+              React를 비롯한 여러 기술들을 활용하여 농업 네비게이션의
+              Front-end를 개발하였습니다. 공공 API를 이용해 데이터를 수집하고,
+              react-chartjs-2를 활용하여 시각화를 구현했습니다. 또한 react
+              query를 이용하여 데이터의 캐싱 및 관리를 효율적으로 처리했습니다.
+              이를 통해 사용자들이 더욱 편리하고 직관적으로 정보를 확인할 수
+              있도록 구현했습니다.
+            </p> */}
+        </div>
+        <div className="relative z-10 flex flex-wrap items-center justify-center transition-all duration-500 opacity-0 group-hover:opacity-100">
+          <span className="bg-[rgba(100,100,100,0.8)] text-gray-200 py-1 px-2 rounded-full mx-1 mb-2 text-sm">
+            HTML
+          </span>
+          <span className="bg-[rgba(100,100,100,0.8)] text-gray-200 py-1 px-2 rounded-full mx-1 mb-2 text-sm">
+            Tailwind css
+          </span>
+          <span className="bg-[rgba(100,100,100,0.8)] text-gray-200 py-1 px-2 rounded-full mx-1 mb-2 text-sm">
+            React
+          </span>
+          <span className="bg-[rgba(100,100,100,0.8)] text-gray-200 py-1 px-2 rounded-full mx-1 mb-2 text-sm">
+            React query
+          </span>
+          <span className="bg-[rgba(100,100,100,0.8)] text-gray-200 py-1 px-2 rounded-full mx-1 mb-2 text-sm">
+            공공 API
+          </span>
+        </div>
+      </div>
+      <div className="relative z-10 flex justify-center transition-all duration-500 opacity-0 group-hover:opacity-100">
+        <span className="px-4 py-2 font-bold text-white transition-all border rounded-full hover:bg-[rgba(255,255,255,0.8)] hover:text-gray-500 hover:border-none">
+          자세히 보기
+        </span>
+      </div>
+      <img
+        src="/images/farmconnect/m1.png"
+        className="absolute top-0 transition-all duration-500 -translate-x-1/2 left-1/2 group-hover:brightness-50 group-hover:scale-125 "
+      ></img>
     </div>
   );
 }
@@ -213,7 +345,7 @@ const skillData = [
     name: "Database",
     bgColor: "#E8D04F",
     description:
-      "node.js와 php를 사용하여 서버사이드 렌더링 및 RESTful API를 구현할 수 있습니다.",
+      "MySQL와 MongoDB를 사용하여 데이터베이스 설계 및 관리, 쿼리 작성, API와의 연동 경험이 있습니다.",
     skill: [
       {
         name: "Mongodb",
@@ -288,6 +420,7 @@ function BackColor() {
   let skillHeight0 = skillData[0].skill.length * 500 + 1000 + mainHeight;
   let skillHeight1 = skillHeight0 + skillData[1].skill.length * 500 + 1000;
   let skillHeight2 = skillHeight1 + skillData[2].skill.length * 500 + 1000;
+  let skillHeight3 = skillHeight2 + skillData[3].skill.length * 1200 + 1000;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -320,6 +453,13 @@ function BackColor() {
           89 - percentage * (89 - 170)
         }, ${227 - percentage * (227 - 77)})`;
         setBgColor(newColor);
+      } else if (scrollY >= skillHeight3 && scrollY <= 300 + skillHeight3) {
+        const percentage =
+          (scrollY - skillHeight3) / (300 + skillHeight3 - skillHeight3);
+        const newColor = `rgb(${232 - percentage * (232 - 25)}, ${
+          170 - percentage * (170 - 31)
+        }, ${77 - percentage * (77 - 40)})`;
+        setBgColor(newColor);
       } else if (scrollY < mainHeight) {
         setBgColor("rgb(255,255,255)");
       } else if (scrollY < skillHeight0) {
@@ -328,8 +468,10 @@ function BackColor() {
         setBgColor("rgb(251,98,80)");
       } else if (scrollY < skillHeight2) {
         setBgColor("rgb(128,89,227)");
-      } else {
+      } else if (scrollY < skillHeight3) {
         setBgColor("rgb(232,170,77)");
+      } else {
+        setBgColor("rgb(25,31,40)");
       }
     };
     window.addEventListener("scroll", handleScroll);
@@ -386,7 +528,6 @@ function Main() {
           animation={ZoomInScroll}
           className="bg-gray-100 rounded-3xl w-[90%] h-[80%] flex justify-center items-center overflow-hidden brightness-100"
         >
-          {/* <img src={mainImg1}></img> */}
           <img src="/images/main1.jpg" className="w-full opacity-30"></img>
         </Animator>
         <Animator animation={ZoomInScrollOut}>
@@ -421,7 +562,7 @@ function Main() {
           </span>
           <br />
           <br />
-          <span className="text-5xl font-extrabold text-gray-900">
+          <span className="text-5xl font-extrabold text-gray-900 break-keep">
             지금은 개발에 푹 빠져 있습니다.
           </span>
         </Animator>
@@ -429,10 +570,10 @@ function Main() {
       <ScrollPage>
         <div className="flex items-center justify-center h-full">
           <span className="text-4xl font-bold text-center text-gray-700">
-            <Animator animation={MoveOut(500, 0)} className="mb-10">
+            <Animator animation={MoveOut(500, 0)} className="mb-10 break-keep">
               항상 Clean Code와 Test에 대한 고민을 하며
             </Animator>
-            <Animator animation={MoveOut(-500, 0)}>
+            <Animator animation={MoveOut(-500, 0)} className=" break-keep">
               디자인과 기술, 그리고 애플🍎에 관심이 많습니다.
             </Animator>
           </span>
@@ -443,7 +584,7 @@ function Main() {
           animation={ZoomInScrollOut}
           className="w-full text-center bg-[#d3e5ff] h-full flex justify-center items-center"
         >
-          <span className="font-black text-transparent text-7xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+          <span className="font-black text-transparent text-7xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 break-keep">
             생각을 즐기는 개발자, 정한결입니다.
           </span>
         </Animator>
@@ -512,12 +653,12 @@ function SkillDesign1(props: SkillProps) {
     return 0 + Math.max((scrollPosition - a) / b, 0);
   };
 
-  let scale = (a: number, b: number) => {
-    return a - Math.max((scrollPosition - b) / 2000, 0);
-  };
-
   let top = (a: number) => {
     return a - Math.max(scrollPosition / 10, 0);
+  };
+
+  let scale = (a: number, b: number) => {
+    return a - Math.max((scrollPosition - b) / 2000, 0);
   };
 
   return (
@@ -661,6 +802,7 @@ function SkillDesign1(props: SkillProps) {
     </div>
   );
 }
+
 function SkillDesign2(props: SkillProps) {
   let mainHeight: number = useSelector(
     (state: { mainHeight: number }) => state.mainHeight
