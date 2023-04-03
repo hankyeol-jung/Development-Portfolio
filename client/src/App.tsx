@@ -109,6 +109,39 @@ interface ProjectsProps {
   skillHeight?: number;
 }
 
+const projectData = [
+  {
+    title: "포트폴리오 개발",
+    company: "한결",
+    skill: ["HTML", "Tailwind css", "React"],
+    image: "/images/portfolio/m1.png",
+  },
+  {
+    title: "농업 네비게이션 Front-end 개발",
+    company: "팜커넥트",
+    skill: ["HTML", "Tailwind css", "React", "React query", "공공 API"],
+    image: "/images/farmconnect/m1.png",
+  },
+  {
+    title: "e-catalog 개발",
+    company: "엘그린텍",
+    skill: ["HTML", "CSS", "React"],
+    image: "/images/eltinfood/m1.png",
+  },
+  {
+    title: "반응형 홈페이지 개발",
+    company: "누림",
+    skill: ["HTML", "CSS", "Javascript", "PHP", "Mysql"],
+    image: "/images/nurim/m1.png",
+  },
+  {
+    title: "영문 홈페이지 개발",
+    company: "나인비",
+    skill: ["HTML", "CSS", "Javascript", "PHP", "Mysql"],
+    image: "/images/nineb/m1.png",
+  },
+];
+
 function Projects(props: ProjectsProps) {
   let mainHeight: number = useSelector(
     (state: { mainHeight: number }) => state.mainHeight
@@ -157,26 +190,36 @@ function Projects(props: ProjectsProps) {
           }px)`,
         }}
       >
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
+        {projectData.map((a, i) => (
+          <ProjectCard
+            title={a.title}
+            company={a.company}
+            index={i}
+            image={a.image}
+          />
+        ))}
       </div>
     </div>
   );
 }
 
-function ProjectCard() {
+interface ProjectCardProps {
+  title: string;
+  company: string;
+  index: number;
+  image: string;
+}
+
+function ProjectCard(props: ProjectCardProps) {
   return (
     <div className="w-[480px] h-[300px] rounded-xl mx-10 px-7 py-10 relative overflow-hidden group cursor-pointer mb-10 flex justify-between flex-col">
       <div>
         <div className="relative z-10 mb-5 transition-all duration-500 opacity-0 group-hover:opacity-100 ">
           <p className="mb-2 text-3xl font-bold text-center text-white break-keep ">
-            농업 네비게이션 Front-end 개발
+            {props.title}
           </p>
           <p className="text-xl font-medium text-center text-gray-200 break-keep ">
-            팜커넥트
+            {props.company}
           </p>
           {/* <p className="text-base font-medium text-center text-white break-keep ">
               React를 비롯한 여러 기술들을 활용하여 농업 네비게이션의
@@ -188,21 +231,11 @@ function ProjectCard() {
             </p> */}
         </div>
         <div className="relative z-10 flex flex-wrap items-center justify-center transition-all duration-500 opacity-0 group-hover:opacity-100">
-          <span className="bg-[rgba(100,100,100,0.8)] text-gray-200 py-1 px-2 rounded-full mx-1 mb-2 text-sm">
-            HTML
-          </span>
-          <span className="bg-[rgba(100,100,100,0.8)] text-gray-200 py-1 px-2 rounded-full mx-1 mb-2 text-sm">
-            Tailwind css
-          </span>
-          <span className="bg-[rgba(100,100,100,0.8)] text-gray-200 py-1 px-2 rounded-full mx-1 mb-2 text-sm">
-            React
-          </span>
-          <span className="bg-[rgba(100,100,100,0.8)] text-gray-200 py-1 px-2 rounded-full mx-1 mb-2 text-sm">
-            React query
-          </span>
-          <span className="bg-[rgba(100,100,100,0.8)] text-gray-200 py-1 px-2 rounded-full mx-1 mb-2 text-sm">
-            공공 API
-          </span>
+          {projectData[props.index].skill.map((a) => (
+            <span className="bg-[rgba(100,100,100,0.8)] text-gray-200 py-1 px-2 rounded-full mx-1 mb-2 text-sm">
+              {a}
+            </span>
+          ))}
         </div>
       </div>
       <div className="relative z-10 flex justify-center transition-all duration-500 opacity-0 group-hover:opacity-100">
@@ -211,8 +244,8 @@ function ProjectCard() {
         </span>
       </div>
       <img
-        src="/images/farmconnect/m1.png"
-        className="absolute top-0 transition-all duration-500 -translate-x-1/2 left-1/2 group-hover:brightness-50 group-hover:scale-125 "
+        src={props.image}
+        className="absolute top-0 object-cover w-full h-full transition-all duration-500 -translate-x-1/2 left-1/2 group-hover:brightness-50 group-hover:scale-125"
       ></img>
     </div>
   );
