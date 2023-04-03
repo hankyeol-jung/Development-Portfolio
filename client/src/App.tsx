@@ -26,6 +26,10 @@ import {
   faReact,
   faNodeJs,
   faPhp,
+  faGit,
+  faGithubAlt,
+  faGithub,
+  faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -70,11 +74,35 @@ function App() {
       {loading === true ? (
         <Projects index={3} skillHeight={skillHeight} />
       ) : null}
+      <Footer />
     </div>
   );
 }
 
-function Footer() {}
+function Footer() {
+  return (
+    <div className="relative flex justify-center py-10 bg-neutral-200">
+      <div className="text-center">
+        <div className="mb-4 text-lg font-medium text-gray-700">
+          한결 포트폴리오
+        </div>
+        <div className="text-sm font-normal text-gray-600">
+          <p className="mb-2">전화번호: 010-3349-6506</p>
+          <p className="mb-2">이메일: whd6023@gmail.com</p>
+          <p className="mb-2">주소: 대전광역시 중구 어딘가</p>
+        </div>
+        <div className="mt-5">
+          <span className="mx-2 text-4xl text-gray-500 transition-all cursor-pointer hover:text-gray-800">
+            <FontAwesomeIcon icon={faGithub} />
+          </span>
+          <span className="mx-2 text-4xl text-gray-500 transition-all cursor-pointer hover:text-gray-800">
+            <FontAwesomeIcon icon={faLinkedin} />
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 interface ProjectsProps {
   index: number;
