@@ -32,6 +32,9 @@ import {
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
+import { Route, Routes, Link } from "react-router-dom";
+import Project from "./Routes/Project";
+import { projectData } from "./data/data";
 
 function App() {
   const mainRef = useRef<HTMLDivElement>(null);
@@ -61,20 +64,30 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <BackColor />
-      <div ref={mainRef}>
-        <Main />
-      </div>
-      <div ref={skillRef}>
-        <SkillDesign1 index={0} />
-        <SkillDesign1 index={1} />
-        <SkillDesign1 index={2} />
-        <SkillDesign2 index={3} />
-      </div>
-      {loading === true ? (
-        <Projects index={3} skillHeight={skillHeight} />
-      ) : null}
-      <Footer />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <BackColor />
+              <div ref={mainRef}>
+                <Main />
+              </div>
+              <div ref={skillRef}>
+                <SkillDesign1 index={0} />
+                <SkillDesign1 index={1} />
+                <SkillDesign1 index={2} />
+                <SkillDesign2 index={3} />
+              </div>
+              {loading === true ? (
+                <Projects index={3} skillHeight={skillHeight} />
+              ) : null}
+              <Footer />
+            </>
+          }
+        />
+        <Route path="/project/:id" element={<Project />} />
+      </Routes>
     </div>
   );
 }
@@ -108,39 +121,6 @@ interface ProjectsProps {
   index: number;
   skillHeight?: number;
 }
-
-const projectData = [
-  {
-    title: "포트폴리오 개발",
-    company: "한결",
-    skill: ["HTML", "Tailwind css", "React"],
-    image: "/images/portfolio/m1.png",
-  },
-  {
-    title: "농업 네비게이션 Front-end 개발",
-    company: "팜커넥트",
-    skill: ["HTML", "Tailwind css", "React", "React query", "공공 API"],
-    image: "/images/farmconnect/m1.png",
-  },
-  {
-    title: "e-catalog 개발",
-    company: "엘그린텍",
-    skill: ["HTML", "CSS", "React"],
-    image: "/images/eltinfood/m1.png",
-  },
-  {
-    title: "반응형 홈페이지 개발",
-    company: "누림",
-    skill: ["HTML", "CSS", "Javascript", "PHP", "Mysql"],
-    image: "/images/nurim/m1.png",
-  },
-  {
-    title: "영문 홈페이지 개발",
-    company: "나인비",
-    skill: ["HTML", "CSS", "Javascript", "PHP", "Mysql"],
-    image: "/images/nineb/m1.png",
-  },
-];
 
 function Projects(props: ProjectsProps) {
   let mainHeight: number = useSelector(
@@ -192,6 +172,7 @@ function Projects(props: ProjectsProps) {
       >
         {projectData.map((a, i) => (
           <ProjectCard
+            id={a.id}
             title={a.title}
             company={a.company}
             index={i}
@@ -204,6 +185,7 @@ function Projects(props: ProjectsProps) {
 }
 
 interface ProjectCardProps {
+  id: number;
   title: string;
   company: string;
   index: number;
@@ -212,7 +194,10 @@ interface ProjectCardProps {
 
 function ProjectCard(props: ProjectCardProps) {
   return (
-    <div className="w-[480px] h-[300px] rounded-xl mx-10 px-7 py-10 relative overflow-hidden group cursor-pointer mb-10 flex justify-between flex-col">
+    <Link
+      to={"/project/" + props.id}
+      className="w-[480px] h-[300px] rounded-xl mx-10 px-7 py-10 relative overflow-hidden group cursor-pointer mb-10 flex justify-between flex-col"
+    >
       <div>
         <div className="relative z-10 mb-5 transition-all duration-500 opacity-0 group-hover:opacity-100 ">
           <p className="mb-2 text-3xl font-bold text-center text-white break-keep ">
@@ -247,7 +232,7 @@ function ProjectCard(props: ProjectCardProps) {
         src={props.image}
         className="absolute top-0 object-cover w-full h-full transition-all duration-500 -translate-x-1/2 left-1/2 group-hover:brightness-50 group-hover:scale-125"
       ></img>
-    </div>
+    </Link>
   );
 }
 
@@ -554,9 +539,9 @@ function Header() {
   return (
     <nav className="fixed z-10 w-screen bg-opaqueGray-700 backdrop-blur-md">
       <div className="flex items-center justify-between px-10 mx-auto max-w-7xl h-14">
-        <div className="text-base font-bold text-white cursor-pointer">
+        <Link to="/" className="text-base font-bold text-white cursor-pointer">
           한결
-        </div>
+        </Link>
         <ul className="flex items-center text-base font-medium text-white">
           <li className="p-2 mx-2 transition-all rounded cursor-pointer hover:bg-opaqueGray-700">
             게시판
