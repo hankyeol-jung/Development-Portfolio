@@ -64,30 +64,32 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <BackColor />
-              <div ref={mainRef}>
-                <Main />
-              </div>
-              <div ref={skillRef}>
-                <SkillDesign1 index={0} />
-                <SkillDesign1 index={1} />
-                <SkillDesign1 index={2} />
-                <SkillDesign2 index={3} />
-              </div>
-              {loading === true ? (
-                <Projects index={3} skillHeight={skillHeight} />
-              ) : null}
-              <Footer />
-            </>
-          }
-        />
-        <Route path="/project/:id" element={<Project />} />
-      </Routes>
+      <div id="scrollbar">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <BackColor />
+                <div ref={mainRef}>
+                  <Main />
+                </div>
+                <div ref={skillRef}>
+                  <SkillDesign1 index={0} />
+                  <SkillDesign1 index={1} />
+                  <SkillDesign1 index={2} />
+                  <SkillDesign2 index={3} />
+                </div>
+                {loading === true ? (
+                  <Projects index={3} skillHeight={skillHeight} />
+                ) : null}
+                <Footer />
+              </>
+            }
+          />
+          <Route path="/project/:id" element={<Project />} />
+        </Routes>
+      </div>
     </div>
   );
 }
