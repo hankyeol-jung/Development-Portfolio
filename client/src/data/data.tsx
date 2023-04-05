@@ -27,13 +27,22 @@ const projectData = [
   {
     id: 3,
     title: "반응형 홈페이지 개발",
+    enname: "nurim",
     company: "누림",
     skill: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
     image: "/images/nurim/m1.png",
+    description:
+      "HTML, CSS, Javascript, PHP, Mysql 등 다양한 기술을 활용하여 반응형 홈페이지를 개발했습니다. HTML과 CSS를 이용하여 디자인적인 부분을 구현하고, Javascript를 활용하여 동적인 요소를 추가했습니다. PHP와 Mysql을 이용하여 데이터베이스와 연동하여 동적인 콘텐츠를 구현했습니다. 이를 통해 사용자들이 모바일과 데스크탑 등 다양한 환경에서 웹사이트를 쉽게 이용할 수 있도록 구현했습니다.",
+    imageLength: 6,
+    content: [
+      "HTML, CSS, JavaScript를 사용하여 마크업 및 프론트엔드를 개발하였으며 제품, 서비스, 회사 소개 등의 정보를 제공합니다.",
+      "PHP, MySQL을 사용하여 관지자페이지를 제작하였으며 웹사이트 내의 정보를 관리하고 업데이트할수 있게 개발하였습니다.",
+    ],
   },
   {
     id: 4,
     title: "영문 홈페이지 개발",
+    enname: "nineb",
     company: "나인비",
     skill: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
     image: "/images/nineb/m1.png",

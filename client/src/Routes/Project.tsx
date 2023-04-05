@@ -110,7 +110,13 @@ function Project() {
                 <div className="row-span-2 bg-[#FAFAFA] flex justify-center items-center relative">
                   {imageLength.map((a, i) => (
                     <img
-                      src={".././images/nineb/pad" + (i + 1) + ".png"}
+                      src={
+                        ".././images/" +
+                        project.enname +
+                        "/pad" +
+                        (i + 1) +
+                        ".png"
+                      }
                       className={
                         `${a.chk === true ? "opacity-100" : "opacity-0"}` +
                         " w-[420px] opa absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 transition-all duration-500"
@@ -125,7 +131,13 @@ function Project() {
                 <div className=" bg-[#FAFAFA] flex justify-center items-center relative">
                   {imageLength.map((a, i) => (
                     <img
-                      src={".././images/nineb/m" + (i + 1) + ".png"}
+                      src={
+                        ".././images/" +
+                        project.enname +
+                        "/m" +
+                        (i + 1) +
+                        ".png"
+                      }
                       className={
                         `${a.chk === true ? "opacity-100" : "opacity-0"}` +
                         " w-[360px] opa absolute -translate-x-1/2 top-[33px] left-1/2 transition-all duration-500"
@@ -140,7 +152,13 @@ function Project() {
                 <div className=" bg-[#FAFAFA] flex justify-center items-center relative z-10">
                   {imageLength.map((a, i) => (
                     <img
-                      src={".././images/nineb/phone" + (i + 1) + ".png"}
+                      src={
+                        ".././images/" +
+                        project.enname +
+                        "/phone" +
+                        (i + 1) +
+                        ".png"
+                      }
                       className={
                         `${a.chk === true ? "opacity-100" : "opacity-0"}` +
                         " w-[140px] opa absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 transition-all duration-500"
@@ -180,7 +198,7 @@ function Project() {
                 <div className="relative w-2/3 h-full pt-10">
                   <div className="absolute left-28 w-screen max-w-[1166px] mt-20 overflow-hidden">
                     {project.content?.map((a, i) => (
-                      <BigMacImg index={i} />
+                      <BigMacImg index={i} name={project.enname} />
                     ))}
                     <img
                       src=".././images/project/bigmac.png"
@@ -199,6 +217,7 @@ function Project() {
 
 interface BigMacImgProps {
   index: number;
+  name: string;
 }
 
 function BigMacImg(props: BigMacImgProps) {
@@ -242,7 +261,7 @@ function BigMacImg(props: BigMacImgProps) {
       }}
     >
       <img
-        src={".././images/nineb/big" + (props.index + 1) + ".png"}
+        src={".././images/" + props.name + "/big" + (props.index + 1) + ".png"}
         className="absolute top-0 w-full -translate-x-1/2 left-1/2"
       ></img>
     </div>
