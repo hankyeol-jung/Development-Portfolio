@@ -7,6 +7,7 @@ const projectData = [
     image: "/images/portfolio/m1.png",
     description:
       "React를 비롯한 여러 기술들을 활용하여 농업 네비게이션의 Front-end를 개발하였습니다. 공공 API를 이용해 데이터를 수집하고, react-chartjs-2를 활용하여 시각화를 구현했습니다. 또한 react query를 이용하여 데이터의 캐싱 및 관리를 효율적으로 처리했습니다. 이를 통해 사용자들이 더욱 편리하고 직관적으로 정보를 확인할 수 있도록 구현했습니다.",
+    design: 2,
   },
   {
     id: 1,
@@ -16,6 +17,7 @@ const projectData = [
     image: "/images/farmconnect/m1.png",
     description:
       "React를 비롯한 여러 기술들을 활용하여 농업 네비게이션의 Front-end를 개발하였습니다. 공공 API를 이용해 데이터를 수집하고, react-chartjs-2를 활용하여 시각화를 구현했습니다. 또한 react query를 이용하여 데이터의 캐싱 및 관리를 효율적으로 처리했습니다. 이를 통해 사용자들이 더욱 편리하고 직관적으로 정보를 확인할 수 있도록 구현했습니다.",
+    design: 2,
   },
   {
     id: 2,
@@ -23,6 +25,7 @@ const projectData = [
     company: "엘그린텍",
     skill: ["HTML", "CSS", "React"],
     image: "/images/eltinfood/m1.png",
+    design: 2,
   },
   {
     id: 3,
@@ -33,6 +36,7 @@ const projectData = [
     image: "/images/nurim/m1.png",
     description:
       "HTML, CSS, Javascript, PHP, Mysql 등 다양한 기술을 활용하여 반응형 홈페이지를 개발했습니다. HTML과 CSS를 이용하여 디자인적인 부분을 구현하고, Javascript를 활용하여 동적인 요소를 추가했습니다. PHP와 Mysql을 이용하여 데이터베이스와 연동하여 동적인 콘텐츠를 구현했습니다. 이를 통해 사용자들이 모바일과 데스크탑 등 다양한 환경에서 웹사이트를 쉽게 이용할 수 있도록 구현했습니다.",
+    design: 1,
     imageLength: 6,
     content: [
       "HTML, CSS, JavaScript를 사용하여 마크업 및 프론트엔드를 개발하였으며 제품, 서비스, 회사 소개 등의 정보를 제공합니다.",
@@ -48,6 +52,7 @@ const projectData = [
     image: "/images/nineb/m1.png",
     description:
       "HTML, CSS, Javascript, PHP, Mysql 등 다양한 기술을 활용하여 반응형 홈페이지를 개발했습니다. HTML과 CSS를 이용하여 디자인적인 부분을 구현하고, Javascript를 활용하여 동적인 요소를 추가했습니다. PHP와 Mysql을 이용하여 데이터베이스와 연동하여 동적인 콘텐츠를 구현했습니다. 이를 통해 사용자들이 모바일과 데스크탑 등 다양한 환경에서 웹사이트를 쉽게 이용할 수 있도록 구현했습니다.",
+    design: 1,
     imageLength: 6,
     content: [
       "HTML, CSS, JavaScript를 사용하여 마크업 및 프론트엔드를 개발하였으며 제품, 서비스, 회사 소개 등의 정보를 제공합니다.",
