@@ -14,7 +14,9 @@ function Project() {
   const project =
     id !== undefined ? projectData.find((data) => data.id === id) : undefined;
 
-  return <>{project?.design === 1 ? <Design1 id={id} /> : <Design2 />}</>;
+  return (
+    <>{project?.design === 1 ? <Design1 id={id} /> : <Design2 id={id} />}</>
+  );
 }
 
 export default Project;
