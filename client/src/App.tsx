@@ -83,13 +83,13 @@ function App() {
                 {loading === true ? (
                   <Projects index={3} skillHeight={skillHeight} />
                 ) : null}
-                <Footer />
               </>
             }
           />
           <Route path="/project/:id" element={<Project />} />
         </Routes>
       </div>
+      <Footer />
     </div>
   );
 }

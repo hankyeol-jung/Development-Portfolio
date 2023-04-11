@@ -65,7 +65,7 @@ function Design2(props: Design1Props) {
                   totalProgress={progress}
                   paused
                   target={
-                    <div className="opacity-0 translate-y-[150%]">
+                    <div className="opacity-0 translate-y-[100%]">
                       <span className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 break-keep">
                         {project.title}
                       </span>
@@ -76,7 +76,7 @@ function Design2(props: Design1Props) {
                   }
                 >
                   <Tween to={{ y: "0%", opacity: 1 }} position={0}></Tween>
-                  <Tween to={{ y: "-150%", opacity: 0 }} position={2}></Tween>
+                  <Tween to={{ y: "-100%", opacity: 0 }} position={2}></Tween>
                 </Timeline>
                 <Timeline
                   totalProgress={progress}

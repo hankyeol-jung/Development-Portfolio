@@ -72,7 +72,8 @@ function Design1(props: Design1Props) {
   const [moveFixed, setMoveFixed] = useState("absolute");
 
   useEffect(() => {
-    if (scrollPosition >= 0) {
+    console.log(scrollPosition);
+    if (scrollPosition >= 0 && scrollPosition < 3000) {
       setMoveFixed("fixed");
     } else {
       setMoveFixed("absolute");
@@ -185,8 +186,14 @@ function Design1(props: Design1Props) {
           <ScrollPage style={{ height: "200px", backgroundColor: "#fff" }}>
             <div></div>
           </ScrollPage>
-          <div className="relative h-[400vh] -z-10">
-            <div className={moveFixed + " top-0 left-0 w-screen h-screen "}>
+          <div className="relative h-[400vh]">
+            <div
+              className={
+                moveFixed +
+                " left-0 w-screen h-screen " +
+                `${scrollPosition >= 3000 ? "bottom-0" : "top-0"}`
+              }
+            >
               <div className="flex justify-center w-screen max-w-5xl mx-auto">
                 <div className="relative w-1/3">
                   {project.content?.map((a, i) => (
